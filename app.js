@@ -137,26 +137,23 @@ function GatoLeaderRandomizer() {
       remainingSO = availableSO;
       
       const targetCount = composition === 'many' ? 
-        Math.floor(Math.random() * 3) + 5 : // 5-7 boats
+        Math.floor(Math.random() * 3) + 5 : 
         composition === 'balanced' ?
-        Math.floor(Math.random() * 2) + 4 : // 4-5 boats
-        Math.floor(Math.random() * 2) + 2; // 2-3 boats
+        Math.floor(Math.random() * 2) + 4 : 
+        Math.floor(Math.random() * 2) + 2;
 
       for (let i = 0; i < targetCount && availableSubs.length > 0; i++) {
         const randomSub = availableSubs[Math.floor(Math.random() * availableSubs.length)];
         
         let skillLevel;
         if (composition === 'many') {
-          // Mostly green with 1-2 trained
           const trainedCount = selectedSubs.filter(s => s.skill === 'Trained').length;
-          const maxTrained = Math.floor(Math.random() * 2) + 1; // 1 or 2 trained
+          const maxTrained = Math.floor(Math.random() * 2) + 1;
           skillLevel = (trainedCount < maxTrained && Math.random() < 0.3) ? 'trained' : 'green';
         } else if (composition === 'balanced') {
-          // Any experience level
           const skillOptions = ['green', 'trained', 'veteran', 'ace'];
           skillLevel = skillOptions[Math.floor(Math.random() * skillOptions.length)];
         } else {
-          // Elite: veteran or ace
           skillLevel = Math.random() < 0.5 ? 'veteran' : 'ace';
         }
         
@@ -336,6 +333,11 @@ function GatoLeaderRandomizer() {
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-slate-700 p-4 rounded-lg">
+                  <div className="text-sm text-gray-400">Campaign</div>
+                  <div className="text-lg font-semibold">{fleet.campaign}</div>
+                  <div className="text-sm text-blue-300">{fleet.year}</div>
+                </div>
+                <div className="bg-slate-700 p-4 rounded-lg">
                   <div className="text-sm text-gray-400">Length</div>
                   <div className="text-lg font-semibold capitalize">{fleet.length}</div>
                   <div className="text-sm text-gray-400">{fleet.totalSO} Total SO</div>
@@ -392,9 +394,4 @@ function GatoLeaderRandomizer() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<GatoLeaderRandomizer />);text-sm text-gray-400">Campaign</div>
-                  <div className="text-lg font-semibold">{fleet.campaign}</div>
-                  <div className="text-sm text-blue-300">{fleet.year}</div>
-                </div>
-                <div className="bg-slate-700 p-4 rounded-lg">
-                  <div className="
+root.render(<GatoLeaderRandomizer />);
